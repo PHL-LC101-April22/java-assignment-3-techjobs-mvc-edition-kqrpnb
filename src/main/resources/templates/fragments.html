@@ -27,5 +27,59 @@
         </div>
     </div>
 
+    <div th:fragment="search-results">
+        <div class="container">
+            <th:block th:if="${jobs}">
+                <p th:text="${'Results: ' + jobs.size()}"></p>
+            </th:block>
+            <th:block th:unless="${jobs}">
+                <p>Results: </p>
+            </th:block>
+        </div>
+        <div class="container">
+            <th:block th:unless="${searchType}" th:with="searchType = 'all'"></th:block>
+            <th:block th:each="job : ${jobs}">
+                <table class="job-listing">
+                    <tr>
+                        <td>ID</td>
+                        <td th:text="${job.id}"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td th:if="${searchType} == 'name'" th:text="${job.name}"></td>
+                        <td th:unless="${searchType} == 'name'"> <a th:href="@{/list/jobs(column=name,value=${job.name})}"
+                                                                        th:text="${job.name}"></a></td>
+                    </tr>
+                    <tr>
+                        <td>Employer</td>
+                        <td th:if="${searchType} == 'employer'" th:text="${job.employer}"></td>
+                        <td th:unless="${searchType} == 'employer'"> <a th:href="@{/list/jobs(column=employer,value=${job.employer})}"
+                                                                            th:text="${job.employer}"></a></td>
+
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td th:if="${searchType} == 'location'" th:text="${job.location}"></td>
+                        <td th:unless="${searchType} == 'location'"> <a th:href="@{/list/jobs(column=location,value=${job.location})}"
+                                                                            th:text="${job.location}"></a></td>
+                    </tr>
+                    <tr>
+                        <td>Position Type</td>
+                        <td th:if="${searchType} == 'positionType'" th:text="${job.positionType}"></td>
+                        <td th:unless="${searchType} == 'positionType'"> <a th:href="@{/list/jobs(column=positionType,value=${job.positionType})}"
+                                                                            th:text="${job.positionType}"></a></td>
+                    </tr>
+                    <tr>
+                        <td>Skill</td>
+                        <td th:if="${searchType} == 'coreCompetency'" th:text="${job.coreCompetency}"></td>
+                        <td th:unless="${searchType} == 'coreCompetency'"> <a th:href="@{/list/jobs(column=coreCompetency,value=${job.coreCompetency})}"
+                                                                              th:text="${job.coreCompetency}"></a></td>
+                    </tr>
+                </table>
+            </th:block>
+
+        </div>
+    </div>
+
 </body>
 </html>

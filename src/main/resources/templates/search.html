@@ -8,19 +8,25 @@
 
 <div class="container body-content">
 
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+<!--    <h1 th:if="${title}" th:text="${#strings.capitalizeWords(title)}"></h1>-->
 
     <form th:action="@{/search/results}" method = "post">
         <h2>Search by:</h2>
 
         <p>
             <span th:each="column : ${columns}">
-                <input
-                        type="radio"
-                        name="searchType"
-                        th:id="${column.key}"
-                        th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                <input th:if="${searchType}"
+                       type="radio"
+                       name="searchType"
+                       th:id="${column.key}"
+                       th:value="${column.key}"
+                       th:checked="${column.key == searchType}"/>
+                <input th:unless="${searchType}"
+                       type="radio"
+                       name="searchType"
+                       th:id="${column.key}"
+                       th:value="${column.key}"
+                       th:checked="${column.key == 'all'}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -28,7 +34,7 @@
 
         <p>
             <label for="searchTerm">Keyword:</label>
-            <input type="text" name="searchTerm" id="searchTerm" />
+            <input type="text" name="searchTerm" th:value="${searchTerm}" id="searchTerm" />
         </p>
 
         <input type="submit" value="Search" />
@@ -37,6 +43,10 @@
     <hr />
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
+
+    <div th:replace="fragments :: search-results"></div>
+
+
 
 </div>
 
