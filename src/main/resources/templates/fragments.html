@@ -63,6 +63,10 @@
                     </tr>
                     <tr>
                         <td>Name</td>
+                        <td th:text="${job.name}"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
                         <td th:if="${searchType} == 'name'" th:text="${job.name}"></td>
                         <td th:unless="${searchType} == 'name'"> <a th:href="@{/list/jobs(column=name,value=${job.name})}"
                                                                         th:text="${job.name}"></a></td>
