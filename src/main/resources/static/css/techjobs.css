@@ -14,9 +14,13 @@ td {
     vertical-align: top;
 }
 
-tr:nth-child(odd) {
-    background-color: #e4e4e4;
+tr:first-child {
+    background-color: #CECBD6;
 }
+
+/*tr:nth-child(odd) {
+    background-color: #cecbd6;
+}*/
 
 .centeredTable {
     margin-left: auto;
@@ -25,8 +29,9 @@ tr:nth-child(odd) {
 
 table.job-listing {
     margin: 30px auto;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #f6f6f6;
     width: 80%;
+    background-color: #f6f6f6;
 }
 
 table.job-listing td:first-child {
